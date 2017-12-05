@@ -16,8 +16,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.layout_login)
 
         login.setOnClickListener {
-//            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            
+            val intent = Intent()
+            intent.setClass(this,MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
