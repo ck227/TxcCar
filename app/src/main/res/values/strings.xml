@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TxcCar</string>
+    <string name="title_home">首页</string>
+    <string name="title_contact">通讯录</string>
+    <string name="title_buy">求购</string>
+    <string name="title_send">发布</string>
+    <string name="title_my">我的</string>
+</resources>
