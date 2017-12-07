@@ -6,35 +6,34 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import com.ck.network.ApiStores
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ck.util.BottomNavigationViewHelper
 
-
-
 class MainActivity : AppCompatActivity() {
 
-    val baseUrl = "http://192.168.100.222:8080/txcCar/"
+    val baseUrl = ApiStores.API_SERVER_URL
     var baseFragment: BaseFragment? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "indexHtml/index.html")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "indexHtml/index.html?loginName=15717174872")
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_contact -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "addressBookHtml/list.html")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "addressBookHtml/list.html?loginName=15717174872")
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_buy -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "wantToBuyHtmlHtml/list.html")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "wantToBuyHtmlHtml/list.html?loginName=15717174872")
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true

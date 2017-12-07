@@ -1,0 +1,20 @@
+package com.ck.network
+
+import retrofit2.http.GET
+import retrofit2.http.QueryMap
+import rx.Observable
+
+/**
+ * Created by cnbs5 on 2017/12/7.
+ */
+interface ApiStores {
+
+    companion object {
+        //baseUrl
+//        val API_SERVER_URL = "http://120.79.58.87:8080/txcCar/"
+        val API_SERVER_URL = "http://192.168.100.222:8080/txcCar/"
+    }
+
+    @GET("smsVerifyFront/send.html")
+    fun sendCode(@QueryMap options: Map<String, Any>): Observable<ApiResult>
+}

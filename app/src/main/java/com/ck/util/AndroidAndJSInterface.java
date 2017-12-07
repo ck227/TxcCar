@@ -14,6 +14,7 @@ public class AndroidAndJSInterface {
     @JavascriptInterface//一定要写，不然H5调不到这个方法
     public void phoneCall(String phone) {
         Log.e("ck", phone + "ck");
+        //处理权限？
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
         MyApplication.getInstance().getApplicationContext().startActivity(intent);
     }
