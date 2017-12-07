@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.fragment_base.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.ck.txccar.R.id.webView
+import com.ck.util.AndroidAndJSInterface
+import com.ck.txccar.R.id.webView
+
+
 
 
 /**
@@ -31,7 +35,6 @@ class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val url = arguments.getString("url")
 
-
         webView.settings.javaScriptEnabled = true
         webView.settings.builtInZoomControls = true
         webView.settings.useWideViewPort = true
@@ -39,6 +42,8 @@ class BaseFragment : Fragment() {
         webView.settings.loadWithOverviewMode = false
         webView.settings.allowContentAccess = false
         webView.settings.domStorageEnabled = true
+        //设置支持js调用java
+        webView.addJavascriptInterface(AndroidAndJSInterface(), "Android")
         webView.webViewClient = object : WebViewClient() {
             //覆盖shouldOverrideUrlLoading 方法
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {

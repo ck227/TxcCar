@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import kotlinx.android.synthetic.main.activity_main.*
+import com.ck.util.BottomNavigationViewHelper
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_my -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "userHtml/user.html?loginName=15717174872 ")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "userHtml/user.html?loginName=15717174872")
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
@@ -62,6 +65,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation)
         bottomNavigationView.selectedItemId = R.id.navigation_home
+
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView)
     }
 
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
