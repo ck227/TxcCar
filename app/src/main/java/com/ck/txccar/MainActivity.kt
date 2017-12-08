@@ -9,6 +9,7 @@ import android.view.KeyEvent
 import com.ck.network.ApiStores
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ck.util.BottomNavigationViewHelper
+import com.ck.util.MyApplication
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,35 +20,35 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "indexHtml/index.html?loginName=15717174872")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "indexHtml/index.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_contact -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "addressBookHtml/list.html?loginName=15717174872")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "addressBookHtml/list.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_buy -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "wantToBuyHtmlHtml/list.html?loginName=15717174872")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "wantToBuyHtmlHtml/list.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_send -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "categoryDetailsHtml/add.html?loginName=15717174872")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "categoryDetailsHtml/add.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_my -> {
                 supportFragmentManager.inTransaction {
-                    baseFragment = BaseFragment.newInstance(baseUrl + "userHtml/user.html?loginName=15717174872")
+                    baseFragment = BaseFragment.newInstance(baseUrl + "userHtml/user.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
                 }
                 return@OnNavigationItemSelectedListener true

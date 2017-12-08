@@ -5,6 +5,12 @@ import android.content.SharedPreferences;
 
 /**
  * Created by cnbs5 on 2017/12/7.
+ * <p>
+ * 1.接口       好了
+ * 2.网页进度   好了
+ * 3.监听网页加载失败
+ * 4.引导启动页  好了
+ * 5.电话
  */
 
 public class MyApplication extends Application {
@@ -22,4 +28,22 @@ public class MyApplication extends Application {
     public static MyApplication getInstance() {
         return instance;
     }
+
+    public String getUserName() {
+        return sp.getString("username", "");
+    }
+
+    public void setUserName(String username) {
+        sp.edit().putString("username", username).commit();
+    }
+
+    public Boolean getIsFirst() {
+        return sp.getBoolean("isFirst", true);
+    }
+
+    public void setIsFirst(Boolean isFirst) {
+        sp.edit().putBoolean("isFirst", isFirst).commit();
+    }
+
+
 }
