@@ -17,7 +17,7 @@ class GuideActivity : BaseActivity() {
 //    private var viewPager: ViewPager? = null
     private var views: MutableList<View>? = null
     private var adapter: GuideAdapter? = null
-    private val pics = intArrayOf(R.layout.guide_one, R.layout.guide_two, R.layout.guide_one, R.layout.guide_two)
+    private val pics = intArrayOf(R.layout.guide_one, R.layout.guide_two, R.layout.guide_three, R.layout.guide_four,R.layout.guide_five)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class GuideActivity : BaseActivity() {
         }
         adapter = GuideAdapter(views)
         viewPager!!.setAdapter(adapter)
-        views!!.get(3).setOnClickListener {
+        views!!.get(4).setOnClickListener {
             val i = Intent(this@GuideActivity, LoginActivity::class.java)
             startActivity(i)
             finish()
@@ -47,21 +47,31 @@ class GuideActivity : BaseActivity() {
                     dot2!!.setImageResource(R.drawable.shape_dot_off)
                     dot3!!.setImageResource(R.drawable.shape_dot_off)
                     dot4!!.setImageResource(R.drawable.shape_dot_off)
+                    dot5!!.setImageResource(R.drawable.shape_dot_off)
                 } else if (position == 1) {
                     dot1!!.setImageResource(R.drawable.shape_dot_off)
                     dot2!!.setImageResource(R.drawable.shape_dot_on)
                     dot3!!.setImageResource(R.drawable.shape_dot_off)
                     dot4!!.setImageResource(R.drawable.shape_dot_off)
+                    dot5!!.setImageResource(R.drawable.shape_dot_off)
                 } else if (position == 2)  {
                     dot1!!.setImageResource(R.drawable.shape_dot_off)
                     dot2!!.setImageResource(R.drawable.shape_dot_off)
                     dot3!!.setImageResource(R.drawable.shape_dot_on)
                     dot4!!.setImageResource(R.drawable.shape_dot_off)
-                }else {
+                    dot5!!.setImageResource(R.drawable.shape_dot_off)
+                }else if (position == 3){
                     dot1!!.setImageResource(R.drawable.shape_dot_off)
                     dot2!!.setImageResource(R.drawable.shape_dot_off)
                     dot3!!.setImageResource(R.drawable.shape_dot_off)
                     dot4!!.setImageResource(R.drawable.shape_dot_on)
+                    dot5!!.setImageResource(R.drawable.shape_dot_off)
+                }else{
+                    dot1!!.setImageResource(R.drawable.shape_dot_off)
+                    dot2!!.setImageResource(R.drawable.shape_dot_off)
+                    dot3!!.setImageResource(R.drawable.shape_dot_off)
+                    dot4!!.setImageResource(R.drawable.shape_dot_off)
+                    dot5!!.setImageResource(R.drawable.shape_dot_on)
                 }
             }
 

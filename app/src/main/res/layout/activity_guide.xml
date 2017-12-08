@@ -46,6 +46,13 @@
             android:layout_marginLeft="12dp"
             android:src="@drawable/shape_dot_off"/>
 
+        <ImageView
+            android:id="@+id/dot5"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/shape_dot_off"/>
+
     </LinearLayout>
 
 </RelativeLayout>
