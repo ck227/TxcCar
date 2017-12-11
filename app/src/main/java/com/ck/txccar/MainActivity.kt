@@ -1,15 +1,18 @@
 package com.ck.txccar
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import android.view.KeyEvent
+import android.view.*
+import android.widget.FrameLayout
 import com.ck.network.ApiStores
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ck.util.BottomNavigationViewHelper
 import com.ck.util.MyApplication
+import qiu.niorgai.StatusBarCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,8 +69,19 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation)
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
+        //底部动画
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView)
+
+
+
+
+        StatusBarCompat.setStatusBarColor(this, resources.getColor(R.color.btn_blue))
+//        StatusBarCompat.
+
     }
+
+
+
 
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = beginTransaction()
