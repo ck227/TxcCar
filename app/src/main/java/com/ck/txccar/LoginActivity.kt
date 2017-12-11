@@ -1,7 +1,6 @@
 package com.ck.txccar
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -14,7 +13,6 @@ import com.ck.util.MyApplication
 import com.ck.util.Utils
 import com.ck.widget.LoadingDialog
 import kotlinx.android.synthetic.main.layout_login.*
-import rx.Subscription
 import java.util.*
 
 /**
@@ -27,11 +25,18 @@ class LoginActivity : BaseActivity() {
     var time = 60
     var dialog: LoadingDialog? = null
 
-//    val mSubscription: Subscription? = null
+//  val mSubscription: Subscription? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_login)
+
+        goBack.setOnClickListener {
+            val intent = Intent()
+            intent.setClass(this@LoginActivity, GuideActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         getCode.setOnClickListener {
             if (checkValue()) {
@@ -49,6 +54,7 @@ class LoginActivity : BaseActivity() {
             val intent = Intent()
             intent.setClass(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -119,7 +125,7 @@ class LoginActivity : BaseActivity() {
                 handler.sendMessage(message)
             }
         }
-        timer!!.schedule(timerTask,100L,timestamp)
+        timer!!.schedule(timerTask, 100L, timestamp)
     }
 
     /*fun timer() {
