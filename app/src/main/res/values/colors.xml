@@ -8,5 +8,7 @@
     <color name="btn_blue">#3473f7</color>
     <color name="btn_blue_press">#803473f7</color>
 
+    <color name="gray">#636363</color>
+
 
 </resources>

@@ -1,6 +1,7 @@
 package com.ck.txccar
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -13,6 +14,7 @@ import com.ck.util.MyApplication
 import com.ck.util.Utils
 import com.ck.widget.LoadingDialog
 import kotlinx.android.synthetic.main.layout_login.*
+import rx.Subscription
 import java.util.*
 
 /**
@@ -24,6 +26,8 @@ class LoginActivity : BaseActivity() {
     var timer: Timer? = null
     var time = 60
     var dialog: LoadingDialog? = null
+
+//    val mSubscription: Subscription? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +63,8 @@ class LoginActivity : BaseActivity() {
             override fun onSuccess(model: ApiResult) {
                 if (model.code == 0) {
                     //倒计时
-//                    timerStart()
+                    timerStart()
+//                    timer()
                 }
                 Toast.makeText(applicationContext, model.msg, Toast.LENGTH_SHORT).show()
             }
@@ -103,9 +108,8 @@ class LoginActivity : BaseActivity() {
         })
     }
 
-    /*fun timerStart() {
+    fun timerStart() {
         val timestamp: Long = 1000
-        val date = Date()
         timer = Timer()
         val timerTask = object : TimerTask() {
             override fun run() {
@@ -115,8 +119,44 @@ class LoginActivity : BaseActivity() {
                 handler.sendMessage(message)
             }
         }
-        timer.schedule(timerTask,timestamp)
+        timer!!.schedule(timerTask,100L,timestamp)
+    }
+
+    /*fun timer() {
+        val count = 59L
+        Flowable.interval(0, 1, TimeUnit.SECONDS)//设置0延迟，每隔一秒发送一条数据
+                .onBackpressureBuffer()//加上背压策略
+                .take(count) //设置循环次数
+                .map{ aLong ->
+                    count - aLong //
+                }
+                .observeOn(AndroidSchedulers.mainThread())//操作UI主要在UI线程
+                .subscribe(object : Subscriber<Long> {
+                    override fun onSubscribe(s: Subscription?) {
+                        getCode.isEnabled = false//在发送数据的时候设置为不能点击
+//                        getCode.col = resources.getColor(Color.GRAY)//背景色设为灰色
+
+                        mSubscription = s
+                        s?.request(Long.MAX_VALUE)//设置请求事件的数量，重要，必须调用
+                    }
+
+                    override fun onNext(aLong: Long?) {
+                        getCode.text = "${aLong}s后重发" //接受到一条就是会操作一次UI
+                    }
+
+                    override fun onComplete() {
+                        getCode.text = "点击重发"
+                        getCode.isEnabled = true
+//                        getCode.textColor = Color.WHITE
+                        mSubscription?.cancel()//取消订阅，防止内存泄漏
+                    }
+
+                    override fun onError(t: Throwable?) {
+                        t?.printStackTrace()
+                    }
+                })
     }*/
+
 
     internal var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -124,11 +164,13 @@ class LoginActivity : BaseActivity() {
                 1 -> if (time > 0) {
                     getCode.isEnabled = false
                     getCode.text = time.toString() + "秒后重试"
+                    getCode.setBackgroundResource(R.drawable.shape_gray)
                 } else {
                     timer!!.cancel()
                     getCode.isEnabled = true
                     getCode.text = "发送验证码"
                     time = 60
+                    getCode.setBackgroundResource(R.drawable.selector_login_btn)
                 }
             }
         }
