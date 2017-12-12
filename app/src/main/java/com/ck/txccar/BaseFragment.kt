@@ -54,7 +54,7 @@ class BaseFragment : Fragment() {
                 if (!Utils.hasNetWork(activity)) {
                     webView.visibility = View.GONE
                     errorView.visibility = View.VISIBLE
-                }else{
+                } else {
                     loading.visibility = View.VISIBLE
                 }
             }
@@ -85,6 +85,18 @@ class BaseFragment : Fragment() {
             }
         }
         webView.loadUrl(url)
+
+
+        //添加长按监听
+//        webView.setOnLongClickListener(View.OnLongClickListener {
+//
+//        })
+
+
+
+//        webView.setOnLongClickListener(View.OnLongClickListener {
+//            return true
+//        })
     }
 
     companion object {

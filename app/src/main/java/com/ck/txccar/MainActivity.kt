@@ -15,6 +15,12 @@ import com.ck.util.BottomNavigationViewHelper
 import com.ck.util.MyApplication
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
+import android.webkit.WebView
+import android.view.ContextMenu.ContextMenuInfo
+import android.view.ContextMenu
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -152,6 +158,24 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenuInfo) {
+        // Confirm the view is a webview
+        if (v is WebView) {
+            Toast.makeText(this, "42423", Toast.LENGTH_LONG).show()
+            val result = v.hitTestResult
+            if (result != null) {
+                val type = result.type
+
+                // Confirm type is an image
+                if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                    val imageUrl = result.extra
+                    Toast.makeText(this, imageUrl, Toast.LENGTH_LONG).show()
+
+                }
+            }
+        }
     }
 
 }

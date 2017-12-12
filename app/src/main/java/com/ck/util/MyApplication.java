@@ -10,10 +10,11 @@ import android.content.SharedPreferences;
  * 2.网页进度   好了
  * 3.监听网页加载失败 ？？
  * 4.引导启动页  好了
- * 5.电话
+ * 5.电话 好了
  * 6.渐变通知栏 好了
  * 7.监听网络不行 好了
  * 8.底部图标  好了
+ * 9.长按下载图片
  */
 
 public class MyApplication extends Application {
