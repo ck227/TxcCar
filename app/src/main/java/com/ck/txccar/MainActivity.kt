@@ -21,7 +21,6 @@ import android.view.ContextMenu.ContextMenuInfo
 import android.view.ContextMenu
 
 
-
 class MainActivity : AppCompatActivity() {
 
     val baseUrl = ApiStores.API_SERVER_URL
@@ -131,8 +130,7 @@ class MainActivity : AppCompatActivity() {
         statusBarView.setBackgroundResource(R.drawable.shape_status_bar)
         decorViewGroup.addView(statusBarView)
 
-//        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
     }
 
     fun getStatusBarHeight(): Int {

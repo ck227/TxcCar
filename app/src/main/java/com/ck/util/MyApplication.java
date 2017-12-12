@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
  * 7.监听网络不行 好了
  * 8.底部图标  好了
  * 9.长按下载图片
+ * 10. android  4.4
  */
 
 public class MyApplication extends Application {

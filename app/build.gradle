@@ -11,7 +11,7 @@ android {
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.ck.txccar"
-        minSdkVersion 23
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -31,10 +31,9 @@ android {
         }
     }
 
-    //BottomNavigationViewHelper的问题
-//    lintOptions {
-//        disable 'RestrictedApi'
-//    }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+    }
 }
 
 dependencies {
@@ -60,7 +59,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
 
-//    compile ('com.github.niorgai:StatusBarCompat:2.1.4', {
-//        exclude group: 'com.android.support'
-//    })
+    compile ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 }
