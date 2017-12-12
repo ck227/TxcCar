@@ -6,7 +6,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ck.txccar.MainActivity">
+    tools:context="com.ck.txccar.MainActivity"
+    android:fitsSystemWindows="true">
 
     <FrameLayout
         android:id="@+id/content"
@@ -23,6 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
         app:menu="@menu/navigation"/>
 
 

@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.text.TextUtils
+import android.view.Gravity
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import com.ck.network.ApiCallback
 import com.ck.network.ApiClient
@@ -56,6 +59,8 @@ class LoginActivity : BaseActivity() {
             startActivity(intent)
             finish()
         }
+
+
     }
 
     fun getCode() {

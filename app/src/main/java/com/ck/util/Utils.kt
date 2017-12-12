@@ -1,7 +1,10 @@
 package com.ck.util
 
+import android.content.Context
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import android.net.ConnectivityManager
+
 
 /**
  * Created by cnbs5 on 2017/12/7.
@@ -19,5 +22,12 @@ object Utils {
             return false
         }
         return m.matches()
+    }
+
+    fun hasNetWork(context: Context): Boolean {
+        val con_manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return (con_manager.getActiveNetworkInfo() != null
+                && con_manager.getActiveNetworkInfo().isAvailable()
+                && con_manager.getActiveNetworkInfo().isConnected());
     }
 }

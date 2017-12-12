@@ -8,9 +8,12 @@ import android.content.SharedPreferences;
  * <p>
  * 1.接口       好了
  * 2.网页进度   好了
- * 3.监听网页加载失败
+ * 3.监听网页加载失败 ？？
  * 4.引导启动页  好了
  * 5.电话
+ * 6.渐变通知栏 好了
+ * 7.监听网络不行 好了
+ * 8.底部图标  好了
  */
 
 public class MyApplication extends Application {
