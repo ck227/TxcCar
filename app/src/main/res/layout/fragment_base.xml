@@ -36,12 +36,12 @@
             android:layout_centerInParent="true"
             android:text="请检查网络"/>
 
-        <!--<TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="16dp"
-            android:text="点击重试"/>-->
+            android:text="点击重试"/>
 
     </LinearLayout>
 

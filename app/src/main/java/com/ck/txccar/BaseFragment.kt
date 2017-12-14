@@ -39,11 +39,7 @@ import java.io.IOException
 
 class BaseFragment : PermissionFragment() {
 
-//    var loadingDialog: LoadingDialog? = null
-
-
     var picUrl: String? = null
-//    var rxPermissions: RxPermissions? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_base, container, false)
@@ -53,7 +49,6 @@ class BaseFragment : PermissionFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        rxPermissions = RxPermissions(activity)
         val url = arguments.getString("url")
 
         webView.isHorizontalScrollBarEnabled = false
@@ -80,6 +75,11 @@ class BaseFragment : PermissionFragment() {
                 if (!Utils.hasNetWork(activity)) {
                     webView.visibility = View.GONE
                     errorView.visibility = View.VISIBLE
+
+                    errorView.setOnClickListener {
+                        webView.loadUrl(url)
+                    }
+                    Toast.makeText(context, "请检查网络", Toast.LENGTH_SHORT).show()
                 } else {
                     loading.visibility = View.VISIBLE
                 }
@@ -91,6 +91,13 @@ class BaseFragment : PermissionFragment() {
                     loading.visibility = View.GONE
                 } catch(e: Exception) {
 
+                }
+                if (!Utils.hasNetWork(activity)) {
+                    webView.visibility = View.GONE
+                    errorView.visibility = View.VISIBLE
+                } else {
+                    webView.visibility = View.VISIBLE
+                    errorView.visibility = View.GONE
                 }
                 Log.e("ck", "finished")
             }
@@ -114,39 +121,6 @@ class BaseFragment : PermissionFragment() {
 
 
         webView.setOnLongClickListener(View.OnLongClickListener {
-
-            /*requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, object : PermissionCallBack {
-                override fun permissionGranted() {
-                    super.permissionGranted()
-                    Log.v("Call permissions", "Granted")
-                    val hitTestResult = webView.hitTestResult
-                    // 如果是图片类型或者是带有图片链接的类型
-                    if (hitTestResult.type == WebView.HitTestResult.IMAGE_TYPE || hitTestResult.type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-                        // 弹出保存图片的对话框
-                        val builder = AlertDialog.Builder(context)
-                        builder.setTitle("提示")
-                        builder.setMessage("保存图片到本地")
-                        builder.setPositiveButton("确认", DialogInterface.OnClickListener { dialogInterface, i ->
-                            val picUrl2 = hitTestResult.extra//获取图片链接
-                            picUrl = picUrl2
-                            //保存图片到相册
-                            Thread(Runnable {
-                                url2bitmap(picUrl2)
-                            }).start()
-                        })
-                        builder.setNegativeButton("取消", // 自动dismiss
-                                DialogInterface.OnClickListener { dialogInterface, i -> })
-                        val dialog = builder.create()
-                        dialog.show()
-                        return@OnLongClickListener true
-                    }
-                }
-
-                override fun permissionDenied() {
-                    super.permissionDenied()
-                    Log.v("Call permissions", "Denied")
-                }
-            })*/
 
             val hitTestResult = webView.hitTestResult
             // 如果是图片类型或者是带有图片链接的类型
@@ -185,22 +159,6 @@ class BaseFragment : PermissionFragment() {
                     }
                 })
 
-//                // 弹出保存图片的对话框
-//                val builder = AlertDialog.Builder(context)
-//                builder.setTitle("提示")
-//                builder.setMessage("保存图片到本地")
-//                builder.setPositiveButton("确认", DialogInterface.OnClickListener { dialogInterface, i ->
-//                    val picUrl2 = hitTestResult.extra//获取图片链接
-//                    picUrl = picUrl2
-//                    //保存图片到相册
-//                    Thread(Runnable {
-//                        url2bitmap(picUrl2)
-//                    }).start()
-//                })
-//                builder.setNegativeButton("取消", // 自动dismiss
-//                        DialogInterface.OnClickListener { dialogInterface, i -> })
-//                val dialog = builder.create()
-//                dialog.show()
                 return@OnLongClickListener true
             }
 
