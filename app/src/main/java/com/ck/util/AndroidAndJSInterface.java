@@ -16,7 +16,7 @@ public class AndroidAndJSInterface {
     public void phoneCall(String phone) {
 //        Toast.makeText(MyApplication.getInstance().getApplicationContext(), "phone:" + phone, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
         MyApplication.getInstance().getApplicationContext().startActivity(intent);
     }
 
