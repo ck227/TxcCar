@@ -72,16 +72,19 @@ class BaseFragment : PermissionFragment() {
                 super.onPageStarted(view, url, favicon)
                 Log.e("ck", "started")
 
-                if (!Utils.hasNetWork(activity)) {
-                    webView.visibility = View.GONE
-                    errorView.visibility = View.VISIBLE
+                try {
+                    if (!Utils.hasNetWork(activity)) {
+                        webView.visibility = View.GONE
+                        errorView.visibility = View.VISIBLE
 
-                    errorView.setOnClickListener {
-                        webView.loadUrl(url)
+                        errorView.setOnClickListener {
+                            webView.loadUrl(url)
+                        }
+                        Toast.makeText(context, "请检查网络", Toast.LENGTH_SHORT).show()
+                    } else {
+                        loading.visibility = View.VISIBLE
                     }
-                    Toast.makeText(context, "请检查网络", Toast.LENGTH_SHORT).show()
-                } else {
-                    loading.visibility = View.VISIBLE
+                } catch(e: Exception) {
                 }
             }
 
@@ -92,12 +95,15 @@ class BaseFragment : PermissionFragment() {
                 } catch(e: Exception) {
 
                 }
-                if (!Utils.hasNetWork(activity)) {
-                    webView.visibility = View.GONE
-                    errorView.visibility = View.VISIBLE
-                } else {
-                    webView.visibility = View.VISIBLE
-                    errorView.visibility = View.GONE
+                try {
+                    if (!Utils.hasNetWork(activity)) {
+                        webView.visibility = View.GONE
+                        errorView.visibility = View.VISIBLE
+                    } else {
+                        webView.visibility = View.VISIBLE
+                        errorView.visibility = View.GONE
+                    }
+                } catch(e: Exception) {
                 }
                 Log.e("ck", "finished")
             }

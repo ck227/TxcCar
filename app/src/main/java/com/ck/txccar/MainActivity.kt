@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+//                if(navigation.selectedItemId == R.id.navigation_home ){
+//                    return@OnNavigationItemSelectedListener true
+//                }
                 supportFragmentManager.inTransaction {
                     baseFragment = BaseFragment.newInstance(baseUrl + "indexHtml/index.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
@@ -44,6 +47,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_contact -> {
+                if(navigation.selectedItemId == R.id.navigation_contact ){
+                    return@OnNavigationItemSelectedListener true
+                }
                 supportFragmentManager.inTransaction {
                     baseFragment = BaseFragment.newInstance(baseUrl + "addressBookHtml/list.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
@@ -60,6 +66,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_buy -> {
+                if(navigation.selectedItemId == R.id.navigation_buy ){
+                    return@OnNavigationItemSelectedListener true
+                }
                 supportFragmentManager.inTransaction {
                     baseFragment = BaseFragment.newInstance(baseUrl + "wantToBuyHtmlHtml/list.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
@@ -75,6 +84,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_send -> {
+                if(navigation.selectedItemId == R.id.navigation_send ){
+                    return@OnNavigationItemSelectedListener true
+                }
                 supportFragmentManager.inTransaction {
                     baseFragment = BaseFragment.newInstance(baseUrl + "categoryDetailsHtml/add.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
@@ -90,6 +102,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_my -> {
+                if(navigation.selectedItemId == R.id.navigation_my ){
+                    return@OnNavigationItemSelectedListener true
+                }
                 supportFragmentManager.inTransaction {
                     baseFragment = BaseFragment.newInstance(baseUrl + "userHtml/user.html?loginName=" + MyApplication.getInstance().userName)
                     replace(R.id.content, baseFragment, "TAG")
