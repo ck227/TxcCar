@@ -27,7 +27,6 @@ import android.os.Handler
 import android.os.Message
 import io.vrinda.kotlinpermissions.PermissionCallBack
 import io.vrinda.kotlinpermissions.PermissionFragment
-import kotlinx.android.synthetic.main.layout_login.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -60,7 +59,7 @@ class BaseFragment : PermissionFragment() {
         webView.settings.allowContentAccess = false
         webView.settings.domStorageEnabled = true
         //设置支持js调用java
-        webView.addJavascriptInterface(AndroidAndJSInterface(), "Android")
+        webView.addJavascriptInterface(AndroidAndJSInterface(activity as MainActivity), "Android")
         webView.webViewClient = object : WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {

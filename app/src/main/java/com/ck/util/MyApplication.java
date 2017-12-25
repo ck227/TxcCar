@@ -14,11 +14,19 @@ import android.content.SharedPreferences;
  * 6.渐变通知栏 好了
  * 7.监听网络不行 好了
  * 8.底部图标  好了
- * 9.长按下载图片
- * 10. android  4.4
+ * 9.长按下载图片 好了
+ * 10. android  4.4 不管了
+ * 11.版本更新  http://192.168.100.222:8080/txcCar/appVersionHtml/appVersion.html?versionNumber=1
  */
 
 public class MyApplication extends Application {
+
+    /*{
+
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        //PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+    }*/
 
     private static MyApplication instance;
     private SharedPreferences sp;
@@ -28,6 +36,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         sp = getSharedPreferences("user", MODE_PRIVATE);
+//        UMShareAPI.get(this);
     }
 
     public static MyApplication getInstance() {

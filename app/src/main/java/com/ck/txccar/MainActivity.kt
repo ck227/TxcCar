@@ -1,5 +1,7 @@
 package com.ck.txccar
 
+import android.Manifest
+import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -7,7 +9,8 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.*
 import com.ck.network.ApiStores
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,9 +22,13 @@ import android.widget.Toast
 import android.webkit.WebView
 import android.view.ContextMenu.ContextMenuInfo
 import android.view.ContextMenu
+import com.ck.util.AndroidAndJSInterface
+import io.vrinda.kotlinpermissions.PermissionCallBack
+import io.vrinda.kotlinpermissions.PermissionsActivity
+import kotlinx.android.synthetic.main.fragment_base.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : PermissionsActivity() {
 
     val baseUrl = ApiStores.API_SERVER_URL
     var baseFragment: BaseFragment? = null
@@ -47,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_contact -> {
-                if(navigation.selectedItemId == R.id.navigation_contact ){
+                if (navigation.selectedItemId == R.id.navigation_contact) {
                     return@OnNavigationItemSelectedListener true
                 }
                 supportFragmentManager.inTransaction {
@@ -66,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_buy -> {
-                if(navigation.selectedItemId == R.id.navigation_buy ){
+                if (navigation.selectedItemId == R.id.navigation_buy) {
                     return@OnNavigationItemSelectedListener true
                 }
                 supportFragmentManager.inTransaction {
@@ -84,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_send -> {
-                if(navigation.selectedItemId == R.id.navigation_send ){
+                if (navigation.selectedItemId == R.id.navigation_send) {
                     return@OnNavigationItemSelectedListener true
                 }
                 supportFragmentManager.inTransaction {
@@ -102,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_my -> {
-                if(navigation.selectedItemId == R.id.navigation_my ){
+                if (navigation.selectedItemId == R.id.navigation_my) {
                     return@OnNavigationItemSelectedListener true
                 }
                 supportFragmentManager.inTransaction {
@@ -115,8 +122,6 @@ class MainActivity : AppCompatActivity() {
                 val csl = ColorStateList(states, colors)
                 navigation.itemTextColor = csl
                 navigation.itemIconTintList = csl
-
-
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -145,7 +150,7 @@ class MainActivity : AppCompatActivity() {
         statusBarView.setBackgroundResource(R.drawable.shape_status_bar)
         decorViewGroup.addView(statusBarView)
 
-
+        shareClass = AndroidAndJSInterface(this)
     }
 
     fun getStatusBarHeight(): Int {
@@ -173,10 +178,9 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenuInfo) {
+    /*override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenuInfo) {
         // Confirm the view is a webview
         if (v is WebView) {
-            Toast.makeText(this, "42423", Toast.LENGTH_LONG).show()
             val result = v.hitTestResult
             if (result != null) {
                 val type = result.type
@@ -189,6 +193,35 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }*/
+    var shareClass: AndroidAndJSInterface? = null
+
+    fun goShare() {
+//      Toast.makeText(this, "share2", Toast.LENGTH_SHORT).show()
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+
+//                new ShareAction(MainActivity.this)
+//                        .withText("hello")
+//                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+//                        .setCallback(umShareListener)
+//                        .open()
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                Log.v("Call permissions", "Denied")
+            }
+        })
     }
 
 }
