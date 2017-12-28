@@ -184,28 +184,9 @@ class MainActivity : PermissionsActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    /*override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenuInfo) {
-        // Confirm the view is a webview
-        if (v is WebView) {
-            val result = v.hitTestResult
-            if (result != null) {
-                val type = result.type
-
-                // Confirm type is an image
-                if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-                    val imageUrl = result.extra
-                    Toast.makeText(this, imageUrl, Toast.LENGTH_LONG).show()
-
-                }
-            }
-        }
-    }*/
-
-
-
     var shareClass: AndroidAndJSInterface? = null
 
-    fun goShareWeixin() {
+    fun goShareWeixin(path : String) {
         Toast.makeText(this, "shareWeixin", Toast.LENGTH_LONG).show()
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -249,7 +230,7 @@ class MainActivity : PermissionsActivity() {
         })
     }
 
-    fun goShareQQ() {
+    fun goShareQQ(path : String) {
         Toast.makeText(this, "shareQQ", Toast.LENGTH_LONG).show()
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -265,24 +246,7 @@ class MainActivity : PermissionsActivity() {
                 var shareAction: ShareAction? = ShareAction(this@MainActivity)
                 shareAction!!.setPlatform(SHARE_MEDIA.QQ)
                         .withText("hello")
-                        .setCallback(object : UMShareListener {
-
-                            override fun onStart(platform: SHARE_MEDIA) {
-
-                            }
-
-                            override fun onResult(platform: SHARE_MEDIA) {
-//            Toast.makeText(this, "分享成功", Toast.LENGTH_SHORT).show()
-                            }
-
-                            override fun onError(platform: SHARE_MEDIA, t: Throwable) {
-                                //Toast.makeText(this@ShareDetailActivity, "失败" + t.message, Toast.LENGTH_LONG).show()
-                            }
-
-                            override fun onCancel(platform: SHARE_MEDIA) {
-//            Toast.makeText(this@MainActivity, "取消了", Toast.LENGTH_LONG).show()
-                            }
-                        })
+                        .setCallback(umShareListener)
                         .share()
             }
 
@@ -293,7 +257,7 @@ class MainActivity : PermissionsActivity() {
         })
     }
 
-    class umShareListener : UMShareListener {
+    object umShareListener : UMShareListener {
         override fun onStart(platform: SHARE_MEDIA) {
 
         }

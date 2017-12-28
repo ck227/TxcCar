@@ -22,13 +22,13 @@ public class AndroidAndJSInterface {
     }
 
     @JavascriptInterface
-    public void shareweixin() {
-        aActivity.goShareWeixin();
+    public void shareweixin(String path) {
+        aActivity.goShareWeixin(path);
     }
 
     @JavascriptInterface
-    public void shareqq() {
-        aActivity.goShareQQ();
+    public void shareqq(String path) {
+        aActivity.goShareQQ(path);
     }
 
     public AndroidAndJSInterface(MainActivity activity){
