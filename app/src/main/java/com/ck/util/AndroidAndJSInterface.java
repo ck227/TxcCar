@@ -22,8 +22,13 @@ public class AndroidAndJSInterface {
     }
 
     @JavascriptInterface
-    public void share() {
-        aActivity.goShare();
+    public void shareweixin() {
+        aActivity.goShareWeixin();
+    }
+
+    @JavascriptInterface
+    public void shareqq() {
+        aActivity.goShareQQ();
     }
 
     public AndroidAndJSInterface(MainActivity activity){

@@ -12,7 +12,8 @@ interface ApiStores {
     companion object {
         //baseUrl
 //        val API_SERVER_URL = "http://120.79.58.87:8080/txcCar/"
-        val API_SERVER_URL = "http://192.168.100.222:8080/txcCar/"
+//        val API_SERVER_URL = "http://192.168.100.222:8080/txcCar/"
+        val API_SERVER_URL = "http://www.taoxianche.cn/txcCar/"
     }
 
     //验证码

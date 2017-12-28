@@ -3,6 +3,9 @@ package com.ck.util;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
+
 /**
  * Created by cnbs5 on 2017/12/7.
  * <p>
@@ -21,12 +24,13 @@ import android.content.SharedPreferences;
 
 public class MyApplication extends Application {
 
-    /*{
+//    APP ID       1106642778   APP KEY    WysPXETPlSkbz9le
+    {
 
         PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setQQZone("1106642778", "WysPXETPlSkbz9le");
         //PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
-    }*/
+    }
 
     private static MyApplication instance;
     private SharedPreferences sp;
@@ -36,7 +40,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         sp = getSharedPreferences("user", MODE_PRIVATE);
-//        UMShareAPI.get(this);
+        UMShareAPI.get(this);
     }
 
     public static MyApplication getInstance() {
