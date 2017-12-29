@@ -1,5 +1,7 @@
 package com.ck.network
 
+import com.ck.bean.Version
+
 /**
  * Created by cnbs5 on 2017/12/7.
  */
@@ -10,4 +12,6 @@ package com.ck.network
 //)
 
 data class ApiResult(var code: Int,var msg:String)
+
+data class VersionResult(var code: Int,var msg:String,var version : Version)
 

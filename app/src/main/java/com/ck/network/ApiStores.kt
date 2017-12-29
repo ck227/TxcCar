@@ -23,4 +23,10 @@ interface ApiStores {
     //登录
     @GET("userFront/login.html")
     fun login(@QueryMap options: Map<String, String>): Observable<ApiResult>
+
+    //获取
+    @GET("appVersionHtml/appVersion.html")
+    fun checkVersion(@QueryMap options: Map<String, String>): Observable<VersionResult>
+
+//    http://192.168.100.222:8080/txcCar/appVersionHtml/appVersion.html?versionNumber=1
 }

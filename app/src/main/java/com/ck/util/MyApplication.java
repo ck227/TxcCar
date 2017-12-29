@@ -19,7 +19,9 @@ import com.umeng.socialize.UMShareAPI;
  * 8.底部图标  好了
  * 9.长按下载图片 好了
  * 10. android  4.4 不管了
- * 11.版本更新  http://192.168.100.222:8080/txcCar/appVersionHtml/appVersion.html?versionNumber=1
+ * 11.版本更新  好了，需要测试
+ * 12.百度上线 上线中...
+ * 13. 分享
  */
 
 public class MyApplication extends Application {

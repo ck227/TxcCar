@@ -11,7 +11,8 @@
         android:src="@mipmap/arrow_left"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="12dp"
-        android:padding="12dp"/>
+        android:padding="12dp"
+        android:visibility="invisible"/>
 
     <ImageView
         android:layout_width="wrap_content"

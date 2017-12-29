@@ -3,9 +3,11 @@ package com.ck.txccar
 import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentManager
@@ -13,7 +15,6 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.*
-import com.ck.network.ApiStores
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ck.util.BottomNavigationViewHelper
 import com.ck.util.MyApplication
@@ -22,9 +23,9 @@ import android.widget.FrameLayout
 import android.view.ContextMenu.ContextMenuInfo
 import android.view.ContextMenu
 import android.widget.Toast
-import com.ck.network.ApiCallback
-import com.ck.network.ApiResult
+import com.ck.network.*
 import com.ck.util.AndroidAndJSInterface
+import com.ck.widget.LoadingDialog
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.UMShareListener
 import com.umeng.socialize.bean.SHARE_MEDIA
@@ -32,6 +33,12 @@ import io.vrinda.kotlinpermissions.PermissionCallBack
 import io.vrinda.kotlinpermissions.PermissionsActivity
 import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.android.synthetic.main.layout_login.*
+import rx.Observable
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import rx.subscriptions.CompositeSubscription
+import java.util.HashMap
 
 
 class MainActivity : PermissionsActivity() {
@@ -157,6 +164,8 @@ class MainActivity : PermissionsActivity() {
         decorViewGroup.addView(statusBarView)
 
         shareClass = AndroidAndJSInterface(this)
+
+        checkVersion()
     }
 
     fun getStatusBarHeight(): Int {
@@ -273,6 +282,66 @@ class MainActivity : PermissionsActivity() {
         override fun onCancel(platform: SHARE_MEDIA) {
 //            Toast.makeText(this@MainActivity, "取消了", Toast.LENGTH_LONG).show()
         }
+    }
+
+
+    fun checkVersion() {
+        var version = "1.0"
+        try {
+            val manager = this.packageManager
+            val info = manager.getPackageInfo(this.packageName, 0)
+            version = info.versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+
+        val map = HashMap<String, String>()
+        map.put("versionNumber", version)
+
+        addSubscription(ApiClient.retrofit().checkVersion(map), object : ApiCallback<VersionResult>() {
+
+            override fun onSuccess(model: VersionResult) {
+                if (model.code == 0) {
+                    val version = model.version
+                    val b = AlertDialog.Builder(this@MainActivity)
+                    b.setTitle("发现新的版本" + version.versioNumber)
+                    b.setMessage(version.versionContent)
+                    b.setPositiveButton("更新") { dialog, which ->
+                        //这里打开链接
+                        val uri = Uri.parse(version.versionUrl)
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                        if (version.isVersion == 1) {
+                            finish()
+                        }
+                    }
+                    if (version.isVersion == 1) {
+                        b.setCancelable(false)
+                    } else {
+                        b.setNegativeButton("取消") { dialog, which -> }
+                    }
+                    b.create().show()
+                }
+//                Toast.makeText(applicationContext, model.msg, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(msg: String?) {
+                Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFinish() {
+
+            }
+        })
+    }
+
+    val mCompositeSubscription: CompositeSubscription = CompositeSubscription()
+
+    fun <M> addSubscription(observable: Observable<M>, subscriber: Subscriber<M>) {
+        mCompositeSubscription.add(
+                observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(subscriber))
     }
 
 }
