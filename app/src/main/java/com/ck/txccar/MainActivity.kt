@@ -301,7 +301,7 @@ class MainActivity : PermissionsActivity() {
         addSubscription(ApiClient.retrofit().checkVersion(map), object : ApiCallback<VersionResult>() {
 
             override fun onSuccess(model: VersionResult) {
-                if (model.code == 0) {
+                if (model.code == 0 && model.version != null) {
                     val version = model.version
                     val b = AlertDialog.Builder(this@MainActivity)
                     b.setTitle("发现新的版本" + version.versioNumber)
