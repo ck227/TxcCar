@@ -3,6 +3,7 @@ package com.ck.util;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -42,6 +43,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         sp = getSharedPreferences("user", MODE_PRIVATE);
+        Config.DEBUG = true;
         UMShareAPI.get(this);
     }
 

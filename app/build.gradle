@@ -29,27 +29,30 @@ android {
         additionalParameters "--no-version-vectors"
     }
 
+    signingConfigs {
+        myconfig {
+            //这里要修改为自己的debug签名
+            storeFile file("android.keystore")
+            storePassword "android"
+            keyAlias "android.keystore"
+            keyPassword "android"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.myconfig
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.myconfig
         }
     }
 
-    signingConfigs {
-        debug {
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-        release {
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-    }
+
 
 
 }

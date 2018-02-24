@@ -27,8 +27,15 @@ public class AndroidAndJSInterface {
     }
 
     @JavascriptInterface
-    public void shareqq(String path) {
-        aActivity.goShareQQ(path);
+    public void shareqq(String path,String imagePatch,String content,String title) {
+        aActivity.goShareQQ(path,imagePatch,content,title);
+    }
+
+
+
+    @JavascriptInterface
+    public void shareqqapp(String path) {
+        aActivity.goShareQQApp(path);
     }
 
     public AndroidAndJSInterface(MainActivity activity){
