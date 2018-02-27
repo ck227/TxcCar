@@ -30,7 +30,9 @@ public class MyApplication extends Application {
 //    APP ID       1106642778   APP KEY    WysPXETPlSkbz9le
     {
 
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        //备份下签名 70V06nPlUGaKBtLOAkUAlmi8KtHrM8wj  微信开放平台的
+
+        PlatformConfig.setWeixin("wxbb054e3ddd8f21be", "cc4a476bc84cad050b2f5232dc3d399f");
         PlatformConfig.setQQZone("1106642778", "WysPXETPlSkbz9le");
         //PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
     }

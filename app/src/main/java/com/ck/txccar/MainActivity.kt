@@ -290,6 +290,49 @@ class MainActivity : PermissionsActivity() {
 
     }
 
+    fun goShareWeixin(path: String, imagePatch: String, content: String, title: String) {
+
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+//                UMWeb web = new UMWeb(Defaultcontent.url);
+//                web.setTitle("This is music title");//标题
+//                web.setThumb(thumb);  //缩略图
+//                web.setDescription("my description");//描述
+
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN)
+                        .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
+//                        .withText("hello1")
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Granted")
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN)
+                        .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
+//                        .withText("hello2")
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Denied")
+            }
+        })
+
+    }
+
     object umShareListener : UMShareListener {
         override fun onStart(platform: SHARE_MEDIA) {
             Log.e("ck", "cxc")
@@ -396,6 +439,39 @@ class MainActivity : PermissionsActivity() {
                 var shareAction: ShareAction? = ShareAction(this@MainActivity)
 
                 shareAction!!.setPlatform(SHARE_MEDIA.QQ)
+                        .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Denied")
+            }
+        })
+    }
+
+    fun goShareWeixinApp(path: String) {
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN)
+                        .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Granted")
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN)
                         .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
                         .setCallback(umShareListener)
                         .share()

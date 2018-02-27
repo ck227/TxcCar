@@ -22,8 +22,8 @@ public class AndroidAndJSInterface {
     }
 
     @JavascriptInterface
-    public void shareweixin(String path) {
-        aActivity.goShareWeixin(path);
+    public void shareweixin(String path,String imagePatch,String content,String title) {
+        aActivity.goShareWeixin(path,imagePatch,content,title);
     }
 
     @JavascriptInterface
@@ -36,6 +36,11 @@ public class AndroidAndJSInterface {
     @JavascriptInterface
     public void shareqqapp(String path) {
         aActivity.goShareQQApp(path);
+    }
+
+    @JavascriptInterface
+    public void shareweixinapp(String path) {
+        aActivity.goShareWeixinApp(path);
     }
 
     public AndroidAndJSInterface(MainActivity activity){
