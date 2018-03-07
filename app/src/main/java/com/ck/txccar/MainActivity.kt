@@ -1,6 +1,7 @@
 package com.ck.txccar
 
 import android.Manifest
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -48,6 +49,7 @@ class MainActivity : PermissionsActivity() {
 
     val baseUrl = ApiStores.API_SERVER_URL
     var baseFragment: BaseFragment? = null
+    var context : Context = MainActivity@this
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -203,51 +205,6 @@ class MainActivity : PermissionsActivity() {
 
     var shareClass: AndroidAndJSInterface? = null
 
-    fun goShareWeixin(path: String) {
-        Toast.makeText(this, "shareWeixin" + path, Toast.LENGTH_LONG).show()
-        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.CALL_PHONE,
-                Manifest.permission.READ_LOGS,
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.SET_DEBUG_APP,
-                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
-                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
-            override fun permissionGranted() {
-                super.permissionGranted()
-                var shareAction: ShareAction? = ShareAction(this@MainActivity)
-                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN)
-                        .withText("hello")
-                        .setCallback(object : UMShareListener {
-
-                            override fun onStart(platform: SHARE_MEDIA) {
-
-                            }
-
-                            override fun onResult(platform: SHARE_MEDIA) {
-//            Toast.makeText(this, "分享成功", Toast.LENGTH_SHORT).show()
-                            }
-
-                            override fun onError(platform: SHARE_MEDIA, t: Throwable) {
-                                //Toast.makeText(this@ShareDetailActivity, "失败" + t.message, Toast.LENGTH_LONG).show()
-                                Log.v("Call ", "onError")
-                            }
-
-                            override fun onCancel(platform: SHARE_MEDIA) {
-//            Toast.makeText(this@MainActivity, "取消了", Toast.LENGTH_LONG).show()
-                                Log.v("Call ", "onCancel")
-                            }
-                        })
-                        .share()
-            }
-
-            override fun permissionDenied() {
-                super.permissionDenied()
-                Log.v("Call permissions", "Denied")
-            }
-        })
-    }
 
     fun goShareQQ(path: String, imagePatch: String, content: String, title: String) {
 
@@ -281,6 +238,48 @@ class MainActivity : PermissionsActivity() {
                 var shareAction: ShareAction? = ShareAction(this@MainActivity)
 
                 shareAction!!.setPlatform(SHARE_MEDIA.QQ)
+                        .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Denied")
+            }
+        })
+
+    }
+
+
+    fun goShareQQkj(path: String, imagePatch: String, content: String, title: String) {
+
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+//                UMWeb web = new UMWeb(Defaultcontent.url);
+//                web.setTitle("This is music title");//标题
+//                web.setThumb(thumb);  //缩略图
+//                web.setDescription("my description");//描述
+
+                shareAction!!.setPlatform(SHARE_MEDIA.QZONE)
+                        .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Granted")
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+                shareAction!!.setPlatform(SHARE_MEDIA.QZONE)
                         .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
                         .setCallback(umShareListener)
                         .share()
@@ -333,13 +332,63 @@ class MainActivity : PermissionsActivity() {
 
     }
 
+    fun goShareWeixinkj(path: String, imagePatch: String, content: String, title: String) {
+
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+//                UMWeb web = new UMWeb(Defaultcontent.url);
+//                web.setTitle("This is music title");//标题
+//                web.setThumb(thumb);  //缩略图
+//                web.setDescription("my description");//描述
+
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
+//                        .withText("hello1")
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Granted")
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .withMedia(UMWeb(path, content, title, UMImage(this@MainActivity, imagePatch)))
+//                        .withText("hello2")
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Denied")
+            }
+        })
+
+    }
+
+
+
     object umShareListener : UMShareListener {
+
+
+
         override fun onStart(platform: SHARE_MEDIA) {
             Log.e("ck", "cxc")
         }
 
         override fun onResult(platform: SHARE_MEDIA) {
-//            Toast.makeText(this, "分享成功", Toast.LENGTH_SHORT).show()
+
+//            Toast.makeText(super()@MainActivity, "sfds", Toast.LENGTH_SHORT).show()
+            Log.e("ck", "成功")
         }
 
         override fun onError(platform: SHARE_MEDIA, t: Throwable) {
@@ -352,6 +401,8 @@ class MainActivity : PermissionsActivity() {
 //            Toast.makeText(applicationContext, "取消了", Toast.LENGTH_LONG).show()
         }
     }
+
+
 
 
     fun checkVersion() {

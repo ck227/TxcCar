@@ -27,8 +27,18 @@ public class AndroidAndJSInterface {
     }
 
     @JavascriptInterface
+    public void shareweixinkj(String path,String imagePatch,String content,String title) {
+        aActivity.goShareWeixinkj(path,imagePatch,content,title);
+    }
+
+    @JavascriptInterface
     public void shareqq(String path,String imagePatch,String content,String title) {
         aActivity.goShareQQ(path,imagePatch,content,title);
+    }
+
+    @JavascriptInterface
+    public void shareqqkj(String path,String imagePatch,String content,String title) {
+        aActivity.goShareQQkj(path,imagePatch,content,title);
     }
 
 
