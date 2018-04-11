@@ -49,8 +49,18 @@ public class AndroidAndJSInterface {
     }
 
     @JavascriptInterface
+    public void shareqqakj(String path) {
+        aActivity.goShareQQakj(path);
+    }
+
+    @JavascriptInterface
     public void shareweixinapp(String path) {
         aActivity.goShareWeixinApp(path);
+    }
+
+    @JavascriptInterface
+    public void shareweixinkj(String path) {
+        aActivity.goShareWeixinAppkj(path);
     }
 
     public AndroidAndJSInterface(MainActivity activity){

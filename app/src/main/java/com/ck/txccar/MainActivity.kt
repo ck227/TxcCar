@@ -10,6 +10,8 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -49,7 +51,7 @@ class MainActivity : PermissionsActivity() {
 
     val baseUrl = ApiStores.API_SERVER_URL
     var baseFragment: BaseFragment? = null
-    var context : Context = MainActivity@this
+    var context: Context = MainActivity@ this
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -374,33 +376,40 @@ class MainActivity : PermissionsActivity() {
         })
 
     }
-
-
+    val mHandler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            //获得刚才发送的Message对象，然后在这里进行UI操作
+//            Log.e(FragmentActivity.TAG, "------------> msg.what = " + msg.what)
+            Toast.makeText(applicationContext, "失败" , Toast.LENGTH_LONG).show()
+        }
+    }
 
     object umShareListener : UMShareListener {
 
 
-
-        override fun onStart(platform: SHARE_MEDIA) {
-            Log.e("ck", "cxc")
+        override fun onStart(platform: SHARE_MEDIA?) {
+            Log.e("ck", "开始")
         }
 
-        override fun onResult(platform: SHARE_MEDIA) {
+        override fun onResult(platform: SHARE_MEDIA?) {
 
 //            Toast.makeText(super()@MainActivity, "sfds", Toast.LENGTH_SHORT).show()
             Log.e("ck", "成功")
         }
 
-        override fun onError(platform: SHARE_MEDIA, t: Throwable) {
+        override fun onError(platform: SHARE_MEDIA?, t: Throwable?) {
             Log.e("ck", "失败")
-//            Toast.makeText(applicationContext, "失败" + t.message, Toast.LENGTH_LONG).show()
+//          Toast.makeText(applicationContext, "失败" + t.message, Toast.LENGTH_LONG).show()
+//            mHandler
         }
 
-        override fun onCancel(platform: SHARE_MEDIA) {
+        override fun onCancel(platform: SHARE_MEDIA?) {
             Log.e("ck", "取消了")
 //            Toast.makeText(applicationContext, "取消了", Toast.LENGTH_LONG).show()
         }
     }
+
 
 
 
@@ -498,6 +507,39 @@ class MainActivity : PermissionsActivity() {
         })
     }
 
+    fun goShareQQakj(path: String) {
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+                shareAction!!.setPlatform(SHARE_MEDIA.QZONE)
+                        .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Granted")
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+                shareAction!!.setPlatform(SHARE_MEDIA.QZONE)
+                        .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Denied")
+            }
+        })
+    }
+
     fun goShareWeixinApp(path: String) {
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -523,6 +565,39 @@ class MainActivity : PermissionsActivity() {
                 var shareAction: ShareAction? = ShareAction(this@MainActivity)
 
                 shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN)
+                        .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Denied")
+            }
+        })
+    }
+
+    fun goShareWeixinAppkj(path: String) {
+        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS), object : PermissionCallBack {
+            override fun permissionGranted() {
+                super.permissionGranted()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
+                        .setCallback(umShareListener)
+                        .share()
+                Log.v("Call permissions", "Granted")
+            }
+
+            override fun permissionDenied() {
+                super.permissionDenied()
+                var shareAction: ShareAction? = ShareAction(this@MainActivity)
+
+                shareAction!!.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .withMedia(UMWeb(path, "淘现车", "淘现车APP是一家专门展示专用车现车整车、二手整车，现车底盘，二手底盘，及库存车信息类，及周边产品和服务，底盘商目录改装厂目录，顺风车发货带货等交易平台。", UMImage(this@MainActivity, "http://pp.myapp.com/ma_icon/0/icon_52610242_1519441543/96")))
                         .setCallback(umShareListener)
                         .share()
