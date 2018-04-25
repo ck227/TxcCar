@@ -30,8 +30,8 @@ class IndexActivity : Runnable, AppCompatActivity() {
         val intent: Intent
         if (MyApplication.getInstance().isFirst) {
             MyApplication.getInstance().isFirst = false
-//            intent = Intent(this@IndexActivity, GuideActivity::class.java)
-            intent = Intent(this@IndexActivity, LoginActivity::class.java)
+            intent = Intent(this@IndexActivity, GuideActivity::class.java)
+//            intent = Intent(this@IndexActivity, LoginActivity::class.java)
             startActivity(intent)
         } else {
             val username = MyApplication.getInstance().userName
