@@ -121,6 +121,8 @@ class LoginActivity : BaseActivity() {
                 time--
                 val message = handler.obtainMessage()
                 message.what = 1
+
+
                 handler.sendMessage(message)
             }
         }
